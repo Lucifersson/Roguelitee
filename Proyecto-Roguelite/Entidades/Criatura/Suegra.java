@@ -1,70 +1,42 @@
-import java.util.Arrays;
-import java.util.List;
-
 public class Suegra extends Entidad {
 
-    private static final String ID = "CABRA_CORNIACEA";
-    private static final String NOMBRE = "Cabra Corniácea";
-    private static final String DESCRIPCION = "Un bruto con cuernos de obsidiana, enfocado en el combate cuerpo a cuerpo.";
-    private static final String PREGUNTA = "La Cabra te ve. Sus ojos brillan con furia mientras raspa el suelo. ¿Qué haces?";
-
-    private final int danoBaseCarga = 25;
-    private final int umbralDestrezaEsquiva = 14;
-    private final int umbralDefensaBloqueo = 10;
+    // ... Atributos ID, NOMBRE, DESCRIPCION, PREGUNTA ...
+    private final int danoMax = 12;
+    private final int danoMin = 6;
 
     public Suegra() {
-        super(ID, NOMBRE, DESCRIPCION, PREGUNTA);
+        super("CABRA_CORNIACEA", "Cabra Corniácea", "Un bruto con cuernos...", "La Cabra te ve... ¿Qué haces?");
     }
-
-    // --- Interacciones Base Genéricas ---
 
     @Override
     protected List<String> getInteraccionesBase() {
         return Arrays.asList(
-                "1. Atacar con Arma de Melé (Fuerza/Destreza)",     // Opción de Combate Físico
-                "2. Lanzar un Hechizo Ofensivo (Intelecto)",        // Opción de Combate Mágico
-                "3. Esquivar y Flanquear el Ataque (Destreza)",     // Opción de Defensa/Habilidad
-                "4. Intentar Distraer a la Bestia (Suerte/Carisma)" // Opción de Interacción/Social
+                "1. Gritarle un Insulto Fuerte",                      // Consecuencia Fija: Daño Máximo
+                "2. Intentar darle un 'Pat Pat' en la Cabeza",        // Consecuencia Fija: Daño Mínimo
+                "3. Ofrecerle tu Bocadillo de Queso",                 // Consecuencia Fija: Ganancia/Pérdida de item
+                "4. Tirarse al Suelo y Esperar a que Pase"            // Consecuencia Fija: Ganancia/Pérdida de turno
         );
     }
 
     @Override
     public String interactuar(Jugador jugador, String seleccion) {
-
-        String mensajeCabra = "La Cabra Corniácea embiste con toda su fuerza.";
-
         switch (seleccion) {
-            case "1. Atacar con Arma de Melé (Fuerza/Destreza)":
-                // Ataque directo. Siempre recibe un poco de daño del contraataque.
-                jugador.reducirSalud((int) (danoBaseCarga * 0.25));
-                return "Golpeas su costado, pero la Cabra contraataca instintivamente. Recibes daño menor.";
+            case "1. Gritarle un Insulto Fuerte":
+                jugador.reducirSalud(danoMax);
+                return "Tu insulto la enfurece. La Cabra te cornea fuertemente. **Recibes " + danoMax + " de daño.**";
 
-            case "2. Lanzar un Hechizo Ofensivo (Intelecto)":
-                // Se resuelve el daño mágico. Si el hechizo es de control, puede fallar por su fuerza.
-                if (jugador.getStat("Intelecto") >= 15) {
-                    return "Tu rayo mágico la aturde momentáneamente. Ganas una ventaja para el próximo turno.";
-                } else {
-                    return "Tu hechizo rebota en sus cuernos. La Cabra ignora el daño.";
-                }
+            case "2. Intentar darle un 'Pat Pat' en la Cabeza":
+                jugador.reducirSalud(danoMin);
+                return "No eres lo suficientemente rápido y te golpea con el hocico. **Recibes " + danoMin + " de daño.**";
 
-            case "3. Esquivar y Flanquear el Ataque (Destreza)":
-                if (jugador.getStat("Destreza") >= umbralDestrezaEsquiva) {
-                    return mensajeCabra + " Eres rápido. Esquivas el ataque y la dejas expuesta.";
-                } else {
-                    jugador.reducirSalud(danoBaseCarga);
-                    return mensajeCabra + " Fallas y recibes " + danoBaseCarga + " de daño completo.";
-                }
+            case "3. Ofrecerle tu Bocadillo de Queso":
+                // Esto es un castigo, asumiendo que el jugador sí tenía un bocadillo.
+                return "La Cabra olfatea tu bocadillo, lo escupe con desprecio y se lo come. Pierdes tu bocadillo.";
 
-            case "4. Intentar Distraer a la Bestia (Suerte/Carisma)":
-                // La suerte puede determinar si el intento de distracción funciona.
-                if (jugador.getStat("Suerte") >= 12) {
-                    return "Una roca cae del techo y la distrae. Tienes la oportunidad de huir.";
-                } else {
-                    return "Tu intento falla. La Cabra gruñe y se concentra en ti aún más.";
-                }
-
+            case "4. Tirarse al Suelo y Esperar a que Pase":
+                return "La Cabra simplemente te pasa por encima, como si fueras un obstáculo. ¡Encuentro evadido!";
             default:
-                return "Tu acción no tuvo efecto. La Cabra te embiste sin piedad.";
+                return "Error de acción.";
         }
     }
 }
