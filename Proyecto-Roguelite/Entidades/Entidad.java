@@ -15,7 +15,7 @@ public abstract class Entidad {
 
     this.id = id;
     this.nombre = nombre;
-    this.descripcion = descripcion
+    this.descripcion = descripcion;
     this.pregunta = pregunta;
     }
     //Metodos de acceso Getters
@@ -42,7 +42,7 @@ public abstract class Entidad {
         List<String> interacciones = getInteraccionesBase();
 
         //Obtener la interacción extra calculadas en tiempo de ejecución
-        interacciones.addAll(calcularInteraccioneExtra(jugador))
+        interacciones.addAll(calcularInteraccioneExtra(jugador));
 
         return interacciones;
     }
