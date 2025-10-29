@@ -1,62 +1,69 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Entidad {
 
-    //Atributos de Identificación y Narrativa
+	// Atributos de Identificación y Narrativa
 
-    protected final String id;
-    protected final String nombre;
-    protected final String descripcion;
+	protected final String id;
+	protected final String nombre;
+	protected final String descripcion;
 
-    //TEXTO DIÁLOGO O LA PREGUNTA PRINCIPAL DE LA ENTIDAD
-    protected final String pregunta;
+	// TEXTO DIÁLOGO O LA PREGUNTA PRINCIPAL DE LA ENTIDAD
+	protected final String pregunta;
 
-    //Constructor
+	// Constructor
 
-    public Entidad(String id, String nombre, String descripcion,String pregunta) {
+	public Entidad(String id, String nombre, String descripcion, String pregunta) {
 
-    this.id = id;
-    this.nombre = nombre;
-    this.descripcion = descripcion;
-    this.pregunta = pregunta;
-    }
-    //Metodos de acceso Getters
-    public String getId() {
-        return id;
-    }
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.pregunta = pregunta;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	// Metodos de acceso Getters
+	public String getId() {
+		return id;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getPregunta() {
-        return pregunta;
-    }
-    // Devuelve una lista de posibles interacciones con la entidad en la que debe combinar
-    //las 4 interacciones base de la subclase más la extra calculadas
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public final List<String> getInteraccionesDisponibles(Jugador jugador) {
-        //Obtener las opciones base (4) definidas por la subcclase
-        List<String> interacciones = getInteraccionesBase();
+	public String getPregunta() {
+		return pregunta;
+	}
+	// Devuelve una lista de posibles interacciones con la entidad en la que debe
+	// combinar
+	// las 4 interacciones base de la subclase más la extra calculadas
 
-        //Obtener la interacción extra calculadas en tiempo de ejecución
-        interacciones.addAll(calcularInteraccioneExtra(jugador));
+	public final List<String> getInteraccionesDisponibles(Jugador jugador) {
+		// Obtener las opciones base (4) definidas por la subcclase
+		List<String> interacciones = getInteraccionesBase();
 
-        return interacciones;
-    }
-    //Metodo que obliga a cada subclase a definir sus 4 ocpiones base
-    public abstract List<String> getInteraccionesBase();
+		// Obtener la interacción extra calculadas en tiempo de ejecución
+		interacciones.addAll(calcularInteraccioneExtra(jugador));
 
-    //Metodo que obliga a la subclase a definir cómo se manejan la opción seleccionada
-    public abstract String interactuar(Jugador jugador, String seleccion);
+		return interacciones;
+	}
 
-    // Lógica de Interaccion Extra delegada ( Calculable)
+	// Metodo que obliga a cada subclase a definir sus 4 ocpiones base
+	public abstract List<String> getInteraccionesBase();
 
-    protected final List<String> calcularInteraccioneExtra(Jugador jugador){
-        //Por defecto no hay interacciones extra
-        return new ArrayList<>(); // Placeholder
-    }
+	// Metodo que obliga a la subclase a definir cómo se manejan la opción
+	// seleccionada
+	public abstract String interactuar(Jugador jugador, String seleccion);
+
+	// Lógica de Interaccion Extra delegada ( Calculable)
+
+	protected final List<String> calcularInteraccioneExtra(Jugador jugador) {
+		// Por defecto no hay interacciones extra
+		return new ArrayList<>(); // Placeholder
+	}
 
 }
