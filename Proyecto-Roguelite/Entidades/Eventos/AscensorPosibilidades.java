@@ -1,4 +1,4 @@
-package entidades.eventos;
+package entidades.Eventos;
 
 import entidades.Entidad;
 import entidades.Jugador;

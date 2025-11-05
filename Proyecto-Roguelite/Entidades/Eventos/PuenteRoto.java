@@ -49,7 +49,7 @@ public class PuenteRoto extends Entidad {
             case "3. Cagarse y buscar otro camino":
                 return "Pierdes tiempo, pero evitas el peligro. No ocurre nada. Cagón";
             case "4. No hay huevos":
-                jugador.aumentarCarisma(3)
+                jugador.aumentarCarisma(3);
                 return "El puente se da cuenta de con quien está tratando. Pasas sin problemas **Ganas 3 de Carisma**";
             default:
                 return "No entiendes bien qué hacer.";

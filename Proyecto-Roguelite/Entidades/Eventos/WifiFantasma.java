@@ -33,11 +33,11 @@ public class WifiFantasma extends Entidad {
                         "Sigues adelante.";
             case "2. Entrar a un casino online":
                 if (jugador.getSuerte() == 20){
-                    jugador.reducirSuerte(5)
-                    return "Lo metes todo al verde. Recapacitas y, rápidamente, lo cambias todo al rojo. Sale verde. **Pierdes 5 de suerte.**"
+                    jugador.reducirSuerte(5);
+                    return "Lo metes todo al verde. Recapacitas y, rápidamente, lo cambias todo al rojo. Sale verde. **Pierdes 5 de suerte.**";
                 }else{
-                    jugador.aumentarSuerte(5)
-                    return "Lo metes todo al verde. No lo piensas dos veces. Sale verde. **Ganas 5 de suerte.**"
+                    jugador.aumentarSuerte(5);
+                    return "Lo metes todo al verde. No lo piensas dos veces. Sale verde. **Ganas 5 de suerte.**";
                 }
             case "3. Buscar videos de gatos":
                 jugador.aumentarCordura(1);

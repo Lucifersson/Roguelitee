@@ -34,10 +34,10 @@ public class SalaPruebas extends Entidad {
                 return "La voz suspira visiblemente incómoda. Guarda silencio unos segundos antes de abrir una puerta y dejarte libre.";
             case "2. Mentir":
                 if (jugador.getInteligencia() > 10){
-                    jugador.reducirIntimidacion(5)
-                    return "Dices que no pasaste los tests cognitivos en el colegio. A veces se te cae la baba. **Pierdes 5 de Intimidación**"
+                    jugador.reducirIntimidacion(5);
+                    return "Dices que no pasaste los tests cognitivos en el colegio. A veces se te cae la baba. **Pierdes 5 de Intimidación**";
                 } else {
-                    return "Dices que codificas con microcesador x264 slower con 8000 de bitrate CONSTANTE y que no se puede más. La camara te mira raro y te deja irte."
+                    return "Dices que codificas con microcesador x264 slower con 8000 de bitrate CONSTANTE y que no se puede más. La camara te mira raro y te deja irte.";
                 }
             case "3. Sugerir cosas obscenas":
                 return "Le dices que es la mejor IA que has conocido, le preguntas si puede generar una imagen de los bos besándoos.\n" +

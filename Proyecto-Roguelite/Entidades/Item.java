@@ -1,4 +1,4 @@
-// Se asumen estas importaciones necesarias
+package entidades;// Se asumen estas importaciones necesarias
 // import com.roguelike.personaje.Personaje; 
 // import com.roguelike.juego.Encuentro; 
 // import com.roguelike.juego.Terminal; // Para la salida en consola
@@ -90,7 +90,7 @@ public abstract class Item {
 	 * @return true si el item causó una modificación o interacción especial (pasa a
 	 *         la siguiente fase del flujo).
 	 */
-	public abstract boolean activarInteraccionEnEncuentro(Jugador jugador, Evento evento);
+	public abstract boolean activarInteraccionEnEncuentro(Jugador jugador, Entidad evento);
 
 	// ------------------------------------------------------------------
 	// MÉTODOS PÚBLICOS Y GETTERS

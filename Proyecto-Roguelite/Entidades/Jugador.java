@@ -70,6 +70,11 @@ public class Jugador {
         if (inteligencia < 0) inteligencia = 0;
     }
 
+    public void reducirIntimidacion(int cantidad) {
+        intimidacion -= cantidad;
+        if (intimidacion < 0) intimidacion = 0;
+    }
+
     public void aumentarSuerte(int cantidad) {
         suerte += cantidad;
         if (suerte > 20) suerte = 20;
