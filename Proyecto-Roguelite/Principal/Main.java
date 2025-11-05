@@ -1,4 +1,7 @@
-import entidades.Jugador;
+package Principal;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
 
 import java.util.Scanner;
 

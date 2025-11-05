@@ -1,7 +1,7 @@
-package entidades.Eventos;
+package Entidades.Eventos;
 
-import entidades.Entidad;
-import entidades.Jugador;
+import Entidades.Entidad;
+import Entidades.Jugador;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,6 @@ public class AbuelaGalletas extends Entidad {
         );
     }
 
-    @Override
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
             case "1. Comer una galleta":

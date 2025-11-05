@@ -1,3 +1,8 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +17,7 @@ public class BrumaRastreadora extends Entidad {
     }
 
     @Override
-    protected List<String> getInteraccionesBase() {
+    public List<String> getInteraccionesBase() {
         return Arrays.asList(
                 "1. Tocar la Bruma por Curiosidad",                  // Consecuencia Fija: Daño Máximo
                 "2. Cruzar Rápido por el Centro",                    // Consecuencia Fija: Daño Mínimo
@@ -25,11 +30,11 @@ public class BrumaRastreadora extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
             case "1. Tocar la Bruma por Curiosidad":
-                jugador.reducirSalud(danoMax);
+                jugador.reducirCordura(danoMax);
                 return "La Bruma te envuelve con furia, te quema con el frío. Recibes un golpe total de **" + danoMax + " de daño**.";
 
             case "2. Cruzar Rápido por el Centro":
-                jugador.reducirSalud(danoMin);
+                jugador.reducirCordura(danoMin);
                 return "Te resbalas. La Bruma te salpica con escarcha, pero escapas rápido. Recibes **" + danoMin + " de daño**.";
 
             case "3. Preguntarle si está Perdida":

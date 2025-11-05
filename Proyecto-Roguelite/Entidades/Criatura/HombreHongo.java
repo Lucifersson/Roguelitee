@@ -1,3 +1,8 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +17,7 @@ public class HombreHongo extends Entidad {
 	}
 
 	@Override
-	protected List<String> getInteraccionesBase() {
+	public List<String> getInteraccionesBase() {
 		return Arrays.asList(
 				"1. Darle un Fuerte Pisotón", // Consecuencia Fija: Daño Máximo
 				"2. Pinchazo Rápido con un Dedo", // Consecuencia Fija: Daño Mínimo
@@ -25,12 +30,12 @@ public class HombreHongo extends Entidad {
 	public String interactuar(Jugador jugador, String seleccion) {
 		switch (seleccion) {
 			case "1. Darle un Fuerte Pisotón":
-				jugador.reducirSalud(danoMax);
+				jugador.reducirCordura(danoMax);
 				return "El pisotón falla y tropiezas en el barro. Recibes **" + danoMax
 						+ " de daño** por esporas concentradas.";
 
 			case "2. Pinchazo Rápido con un Dedo":
-				jugador.reducirSalud(danoMin);
+				jugador.reducirCordura(danoMin);
 				return "Fallaste la precisión y te pinchas con una seta. Recibes **" + danoMin
 						+ " de daño** por veneno.";
 

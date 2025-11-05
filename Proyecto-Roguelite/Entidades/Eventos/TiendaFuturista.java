@@ -1,7 +1,7 @@
-package entidades.eventos;
+package Entidades.Eventos;
 
-import entidades.Entidad;
-import entidades.Jugador;
+import Entidades.Entidad;
+import Entidades.Jugador;
 
 import java.util.Arrays;
 import java.util.List;

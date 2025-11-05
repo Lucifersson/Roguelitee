@@ -1,3 +1,11 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class Suegra extends Entidad {
 
     // ... Atributos ID, NOMBRE, DESCRIPCION, PREGUNTA ...
@@ -9,7 +17,7 @@ public class Suegra extends Entidad {
     }
 
     @Override
-    protected List<String> getInteraccionesBase() {
+    public List<String> getInteraccionesBase() {
         return Arrays.asList(
                 "1. Gritarle un Insulto Fuerte",                      // Consecuencia Fija: Daño Máximo
                 "2. Intentar darle un 'Pat Pat' en la Cabeza",        // Consecuencia Fija: Daño Mínimo
@@ -22,11 +30,11 @@ public class Suegra extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
             case "1. Gritarle un Insulto Fuerte":
-                jugador.reducirSalud(danoMax);
+                jugador.reducirCordura(danoMax);
                 return "Tu insulto la enfurece. La Cabra te cornea fuertemente. **Recibes " + danoMax + " de daño.**";
 
             case "2. Intentar darle un 'Pat Pat' en la Cabeza":
-                jugador.reducirSalud(danoMin);
+                jugador.reducirCordura(danoMin);
                 return "No eres lo suficientemente rápido y te golpea con el hocico. **Recibes " + danoMin + " de daño.**";
 
             case "3. Ofrecerle tu Bocadillo de Queso":

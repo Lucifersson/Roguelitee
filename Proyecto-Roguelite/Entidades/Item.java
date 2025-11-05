@@ -1,4 +1,4 @@
-package entidades;// Se asumen estas importaciones necesarias
+package Entidades;// Se asumen estas importaciones necesarias
 // import com.roguelike.personaje.Personaje; 
 // import com.roguelike.juego.Encuentro; 
 // import com.roguelike.juego.Terminal; // Para la salida en consola

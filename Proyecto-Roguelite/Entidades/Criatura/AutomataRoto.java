@@ -1,3 +1,11 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class AutomataRoto extends Entidad {
 
     // ... Atributos ID, NOMBRE, DESCRIPCION, PREGUNTA ...
@@ -9,7 +17,7 @@ public class AutomataRoto extends Entidad {
     }
 
     @Override
-    protected List<String> getInteraccionesBase() {
+    public List<String> getInteraccionesBase() {
         return Arrays.asList(
                 "1. Intentar tumbarlo de un empujón",           // Consecuencia Fija: Daño Máximo
                 "2. Tirarle una tuerca a sus circuitos",         // Consecuencia Fija: Daño Mínimo
@@ -22,11 +30,11 @@ public class AutomataRoto extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
             case "1. Intentar tumbarlo de un empujón":
-                jugador.reducirSalud(danoMax);
+                jugador.reducirCordura(danoMax);
                 return "Tu empujón solo lo enfurece. Te electrocuta con una descarga fuerte. **Recibes " + danoMax + " de daño.**";
 
             case "2. Tirarle una tuerca a sus circuitos":
-                jugador.reducirSalud(danoMin);
+                jugador.reducirCordura(danoMin);
                 return "Fallaste el tiro. La tuerca rebota y te golpea en la cabeza. **Recibes " + danoMin + " de daño.**";
 
             case "3. Darle una Orden en Latín":

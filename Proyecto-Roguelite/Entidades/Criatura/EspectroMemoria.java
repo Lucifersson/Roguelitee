@@ -1,3 +1,8 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,12 +20,12 @@ public class EspectroMemoria extends Entidad {
 
 
     @Override
-    protected List<String> getInteraccionesBase() {
+    public List<String> getInteraccionesBase() {
         return Arrays.asList(
                 "1. Intentar darle un golpe 'fantasma'",
                 "2. Cerrar los Ojos y Gritar muy fuerte",
                 "3. Contarle una Historia Aburrida",
-                "4. Intentar Recordar tu Tarea Pendiente"            urno
+                "4. Intentar Recordar tu Tarea Pendiente"
         );
     }
 
@@ -29,11 +34,11 @@ public class EspectroMemoria extends Entidad {
 
         switch (seleccion) {
             case "1. Intentar darle un golpe 'fantasma'":
-                jugador.reducirSalud(danoPsiquicoMax);
+                jugador.reducirCordura(danoPsiquicoMax);
                 return "Tu puño lo atraviesa, pero la retroalimentación psíquica es brutal. Recibes un fuerte golpe mental de **" + danoPsiquicoMax + " de daño**.";
 
             case "2. Cerrar los Ojos y Gritar muy fuerte":
-                jugador.reducirSalud(danoPanicoMin);
+                jugador.reducirCordura(danoPanicoMin);
                 return "Tu grito te deja exhausto y el Espectro se divierte con tu pánico. Recibes **" + danoPanicoMin + " de daño** psíquico.";
 
             case "3. Contarle una Historia Aburrida":
