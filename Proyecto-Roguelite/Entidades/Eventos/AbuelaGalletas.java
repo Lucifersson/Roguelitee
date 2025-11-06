@@ -32,7 +32,7 @@ public class AbuelaGalletas extends Entidad {
             case "1. Comer una galleta":
                 if (jugador.getCordura() < 5) {
                     jugador.reducirCarisma(2);
-                    return "La galleta no estaba bien horneada. Huyes buscando un baño urgentmente. No llegas. **Pierdes 2 de Carisma**";
+                    return "La galleta no estaba bien horneada. Huyes buscando un baño urgentemente. No llegas. **Pierdes 2 de Carisma**";
                 } else {
                     return "Cruje perfecta. Es la mejor galleta que has probado.\n" +
                             "De pronto, otra abuela aparece y te ofrece otra. Y otra.\n" +
@@ -46,7 +46,6 @@ public class AbuelaGalletas extends Entidad {
                     return "La abuela te escucha atentamente y te sigue el juego.\n" +
                             "Parece que la tienes en el bote.";
                 }
-
             case "3. Preguntar de dónde salen tantas abuelas":
                 jugador.reducirCordura(2);
                 return "Las abuelas se detienen y ter miran fijamente." +

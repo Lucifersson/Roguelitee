@@ -28,10 +28,10 @@ public class AscensorPosibilidades extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
             case "1. Pulsar ARRIBA":
-                return "El ascensor sube un piso. Nada explota. Te sientes un poco más vivo.";
+                return "El ascensor sube un piso. ¿Qué esperabas?.";
             case "2. Pulsar ¿ARRIBA?":
                 jugador.reducirCordura(3);
-                return "El ascensor sube varios pisos rápidamente y luego cae en picado. **Pierdes 3 de Cordura.**";
+                return "El ascensor sube varios pisos rápidamente y luego cae en picado. No sabes si te has fracturado un tobillo. **Pierdes 3 de Cordura.**";
             case "3. Romper el panel":
                 if (jugador.getIntimidacion() >= 12) {
                     jugador.aumentarIntimidacion(2);

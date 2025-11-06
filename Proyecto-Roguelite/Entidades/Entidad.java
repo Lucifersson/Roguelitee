@@ -54,7 +54,7 @@ public abstract class Entidad {
     public abstract List<String> getInteraccionesBase();
 
     //Metodo que obliga a la subclase a definir cómo se manejan la opción seleccionada
-    public abstract String interactuar(Jugador jugador, String seleccion);
+    public abstract String interactuar(Jugador jugador, String seleccion) throws InterruptedException;
 
     // Lógica de Interaccion Extra delegada (Calculable)
 

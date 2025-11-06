@@ -1,6 +1,5 @@
 package Principal;
 
-import Entidades.Entidad;
 import Entidades.Jugador;
 
 import java.util.Scanner;
@@ -12,7 +11,8 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      //inicializarDB(); PROXIMAMENTE
+      //Mostrar pantalla de carga al inicio
+      mostrarPantallaCarga();
       mostrarMenu();
     } catch (Exception e) {
       System.out.println("Error: " +e.getMessage());
@@ -21,29 +21,33 @@ public class Main {
   }
 
   private static void mostrarMenu(){
+    String opcion = "";
 
-    while (true) {
+    while (!opcion.equals("4")) {
       limpiarPantalla();
       System.out.println("╔════════════════════════════════════╗");
       System.out.println("║    AVENTURA ROGUELITE TERMINAL     ║");
       System.out.println("╚════════════════════════════════════╝");
       System.out.println("\n1. Nueva partida");
-      System.out.println("2. Ver estadísticas");
-      System.out.println("3. Cargar partida");
+      System.out.println("2. Cargar partida");
+      System.out.println("3. Ver estadísticas");
       System.out.println("4. Salir");
       System.out.print("\nElige una opción: ");
 
-      String opcion = scanner.nextLine();
+      opcion = scanner.nextLine();
 
       switch (opcion) {
         case "1" :
           nuevaPartida();
           break;
         case "2" :
-          //verEstadisticas();
+          //cargarPartida(); /*PROXIMAMENTE*/
           break;
         case "3" :
-          System.out.println("\n¡Hasta la próxima aventurero!");
+          //verEstadisticas();
+          break;
+        case "4" :
+          System.out.println("\n¿Ya te vas? ¡Hasta la próxima!");
           break;
         default:
           System.out.println("ERROR: Opción no válida");
@@ -181,13 +185,82 @@ public class Main {
   }
 
   private static void limpiarPantalla() {
-    /*NO FUNCIONA*/
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
+    /*NO SÉ COMO HACER ESTO AUN*/
   }
 
   private static void esperarEnter() {
     System.out.println("\nPresiona ENTER para continuar...");
     scanner.nextLine();
+  }
+
+  private static void mostrarPantallaCarga() {
+    limpiarPantalla();
+
+    // Logo ASCII
+    String[] logo = {
+              "",
+              "    ██████╗  ██████╗  ██████╗ ██╗   ██╗███████╗██╗     ██╗████████╗███████╗",
+              "    ██╔══██╗██╔═══██╗██╔════╝ ██║   ██║██╔════╝██║     ██║╚══██╔══╝██╔════╝",
+              "    ██████╔╝██║   ██║██║  ███╗██║   ██║█████╗  ██║     ██║   ██║   █████╗  ",
+              "    ██╔══██╗██║   ██║██║   ██║██║   ██║██╔══╝  ██║     ██║   ██║   ██╔══╝  ",
+              "    ██║  ██║╚██████╔╝╚██████╔╝╚██████╔╝███████╗███████╗██║   ██║   ███████╗",
+              "    ╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝   ╚═╝   ╚══════╝",
+              "",
+              "                        ═══ AVENTURA TERMINAL ═══",
+              ""
+    };
+
+    // Mostrar logo línea por línea con efecto
+    for (String linea : logo) {
+      System.out.println(linea);
+      esperar(80); // 80ms por línea
+    }
+
+    // Barra de carga animada
+    System.out.println("\n\n");
+    System.out.println("                           Cargando aventura...\n");
+    mostrarBarraCarga(50); // 50 saltos
+
+    esperar(500); //simular tiempos de carga
+    System.out.println("\n\n                        ¡Presiona ENTER para comenzar!");
+    scanner.nextLine();
+  }
+
+  private static void mostrarBarraCarga(int saltos) {
+    int ancho = 50;
+    System.out.print("            [");
+
+    for (int i = 0; i <= saltos; i++) {
+      int progreso = (i * ancho) / saltos;
+
+      // Volver al inicio de la línea
+      System.out.print("\r            [");
+
+      // Dibujar barra
+      for (int j = 0; j < ancho; j++) {
+        if (j < progreso) {
+          System.out.print("█");
+        } else if (j == progreso) {
+          System.out.print("▓");
+        } else {
+          System.out.print("░");
+        }
+      }
+
+      System.out.print("] " + (i * 100 / saltos) + "%");
+
+      esperar(30); // Velocidad de carga
+    }
+
+    System.out.println();
+  }
+
+  // Método para simular pausas
+  private static void esperar(int milisegundos) {
+    try {
+      Thread.sleep(milisegundos);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
   }
 }
