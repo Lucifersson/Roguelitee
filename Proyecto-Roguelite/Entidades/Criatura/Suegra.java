@@ -29,19 +29,19 @@ public class Suegra extends Entidad {
     @Override
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
-            case "1. Gritarle un Insulto Fuerte":
+            case "1":
                 jugador.reducirCordura(danoMax);
                 return "Tu insulto la enfurece. La Cabra te cornea fuertemente. **Recibes " + danoMax + " de daño.**";
 
-            case "2. Intentar darle un 'Pat Pat' en la Cabeza":
+            case "2":
                 jugador.reducirCordura(danoMin);
                 return "No eres lo suficientemente rápido y te golpea con el hocico. **Recibes " + danoMin + " de daño.**";
 
-            case "3. Ofrecerle tu Bocadillo de Queso":
+            case "3":
                 // Esto es un castigo, asumiendo que el jugador sí tenía un bocadillo.
                 return "La Cabra olfatea tu bocadillo, lo escupe con desprecio y se lo come. Pierdes tu bocadillo.";
 
-            case "4. Tirarse al Suelo y Esperar a que Pase":
+            case "4":
                 return "La Cabra simplemente te pasa por encima, como si fueras un obstáculo. ¡Encuentro evadido!";
             default:
                 return "Error de acción.";

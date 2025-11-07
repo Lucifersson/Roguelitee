@@ -100,27 +100,6 @@ public class Jugador {
         if (inteligencia > 20) inteligencia = 20;
     }
 
-
-    public void modificarEstadistica(String tipo, int cantidad) {
-        switch (tipo.toLowerCase()) {
-            case "carisma":
-                carisma = limitar(carisma + cantidad);
-                break;
-            case "intimidacion":
-                intimidacion = limitar(intimidacion + cantidad);
-                break;
-            case "inteligencia":
-                inteligencia = limitar(inteligencia + cantidad);
-                break;
-            case "suerte":
-                suerte = limitar(suerte + cantidad);
-                break;
-            case "cordura":
-                cordura = limitar(cordura + cantidad);
-                break;
-        }
-    }
-
     private int limitar(int valor) {
         if (valor < 0) return 0;
         if (valor > 20) return 20;

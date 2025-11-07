@@ -1,8 +1,16 @@
 package Principal;
 
+import Entidades.Criatura.HombreHongo;
+import Entidades.Criatura.Suegra;
+import Entidades.Entidad;
 import Entidades.Eventos.AbuelaGalletas;
+import Entidades.Eventos.CajaTexto;
+import Entidades.Eventos.PuenteRoto;
 import Entidades.Jugador;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -241,32 +249,78 @@ public class Main {
   }
 
   private static void jugar() {
-    while (jugador.estaVivo() && situacionActual < 25) {
+    // Lista con todos los eventos posibles
+    List<Entidad> eventosDisponibles = new ArrayList<>();
+    eventosDisponibles.add(new AbuelaGalletas());
+    eventosDisponibles.add(new Suegra());
+    eventosDisponibles.add(new CajaTexto());
+    // hay que modificar esto (en el pdf pone que se sacan desde json)
+
+    // Mezclamos aleatoriamente
+    Collections.shuffle(eventosDisponibles);
+
+    // Bucle del juego (ej: 25 eventos y finaliza)
+    List<Entidad> eventosPartida = eventosDisponibles.subList(0, Math.min(3, eventosDisponibles.size()));
+
+    for (Entidad evento : eventosPartida) {
+      if (!jugador.estaVivo()) break; // Si muere antes de terminar el bucle de juego
+
       limpiarPantalla();
       mostrarEstadoJugador();
 
-      // Obtener la entidad actual (monstruo o evento)
-      AbuelaGalletas agregarGalletas = new AbuelaGalletas();
-      System.out.println(agregarGalletas.getDescripcion());
-      System.out.println(agregarGalletas.getPregunta());
+      System.out.println("─────────────────────────────");
+      System.out.println("Evento: " + evento.getNombre());
+      System.out.println(evento.getDescripcion());
+      System.out.println();
+      System.out.println(evento.getPregunta());
+      System.out.println();
 
-      System.out.println(agregarGalletas.getInteraccionesBase());
+      // Mostrar opciones base + extra
+      List<String> opciones = evento.getInteraccionesDisponibles(jugador);
+
+      for (int i = 0; i < opciones.size(); i++) {
+        System.out.println(opciones.get(i));
+      }
+
+      System.out.print("\nElige una opción: ");
+      String eleccion = scanner.nextLine();
+
+      try {
+        // Ejecutar la interacción seleccionada
+        String resultado = evento.interactuar(jugador, eleccion);
+        System.out.println("\n" + resultado);
+      } catch (Exception e) {
+        System.out.println("\nERROR al procesar el evento: " + e.getMessage());
+      }
+
+      // Verificar si el jugador sigue vivo
+      if (!jugador.estaVivo()) {
+        System.out.println("\nTu mente no soporta más... has perdido toda cordura.");
+        System.out.println("💀 GAME OVER 💀");
+        esperarEnter();
+        return;
+      }
+
       esperarEnter();
-
-      // Mostrar descripción de la entidad
-
-      // Mostrar opciones
-
-      // Opciones especiales
-
-      // Verificar si el jugador murió
-
+      situacionActual++;
     }
+
+    limpiarPantalla();
+    if (jugador.estaVivo()) {
+      System.out.println("══════════════════════════════");
+      System.out.println("     FIN DE LA AVENTURA");
+      System.out.println("══════════════════════════════");
+      System.out.println("\nHas completado " + situacionActual + " eventos.");
+    }else{
+      System.out.println("💀 GAME OVER 💀");
+      System.out.println("Has perdido la cordura por completo...");
+    }
+    esperarEnter();
   }
 
   private static void mostrarEstadoJugador() {
-    System.out.println("\n┌─────────────────── " + jugador.getNombre().toUpperCase() +
-            " (" + jugador.getClase() + ") ───────────────────┐");
+    System.out.println("\n┌───────────────────── " + jugador.getNombre().toUpperCase() +
+            " (" + jugador.getClase() + ") ─────────────────────┐");
     System.out.println("│ ♥ Cordura: " + jugador.getCordura() + "/20" +
             " │ ★ Carisma: " + jugador.getCarisma() +
             " │ ☠ Intimidación: " + jugador.getIntimidacion());
@@ -274,7 +328,7 @@ public class Main {
             " │ ♣ Suerte: " + jugador.getSuerte() +
             " │ ⌂ Items: " + jugador.getInventario().size() + "/3");
     System.out.println("│ Situación: " + (situacionActual + 1) + "/25");
-    System.out.println("└" + "─".repeat(58) + "┘");
+    System.out.println("└" + "─".repeat(59) + "┘");
   }
 
   private static void limpiarPantalla() {
