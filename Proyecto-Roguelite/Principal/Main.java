@@ -216,6 +216,8 @@ public class Main {
       System.out.println("\nERROR AL CARGAR LA PARTIDA");
       esperarEnter();
     }
+
+    jugar();
   }
 
   private static void verEstadisticas() {
@@ -249,7 +251,7 @@ public class Main {
       System.out.println(agregarGalletas.getPregunta());
 
       System.out.println(agregarGalletas.getInteraccionesBase());
-
+      esperarEnter();
 
       // Mostrar descripción de la entidad
 
@@ -263,8 +265,8 @@ public class Main {
   }
 
   private static void mostrarEstadoJugador() {
-    System.out.println("\n┌─────────────── " + jugador.getNombre().toUpperCase() +
-            " (" + jugador.getClase() + ") ───────────────┐");
+    System.out.println("\n┌─────────────────── " + jugador.getNombre().toUpperCase() +
+            " (" + jugador.getClase() + ") ───────────────────┐");
     System.out.println("│ ♥ Cordura: " + jugador.getCordura() + "/20" +
             " │ ★ Carisma: " + jugador.getCarisma() +
             " │ ☠ Intimidación: " + jugador.getIntimidacion());
