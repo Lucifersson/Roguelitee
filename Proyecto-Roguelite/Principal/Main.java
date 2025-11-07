@@ -1,5 +1,6 @@
 package Principal;
 
+import Entidades.Eventos.AbuelaGalletas;
 import Entidades.Jugador;
 
 import java.util.Scanner;
@@ -11,7 +12,10 @@ public class Main {
 
   public static void main(String[] args) {
     try {
-      //Mostrar pantalla de carga al inicio
+      // iniciar sistema de guardado
+      GestorPartidas.inicializar();
+
+      // Mostrar pantalla de carga al inicio
       mostrarPantallaCarga();
       mostrarMenu();
     } catch (Exception e) {
@@ -41,22 +45,37 @@ public class Main {
           nuevaPartida();
           break;
         case "2" :
-          //cargarPartida(); /*PROXIMAMENTE*/
+          cargarPartida();
           break;
         case "3" :
-          //verEstadisticas();
+          verEstadisticas();
           break;
         case "4" :
           System.out.println("\n¿Ya te vas? ¡Hasta la próxima!");
           break;
         default:
-          System.out.println("ERROR: Opción no válida");
+          System.out.println("\nERROR: Opción no válida");
           esperarEnter();
       }
     }
   }
 
   private static void nuevaPartida() {
+    // Verificar si ya existe una partida
+    if (GestorPartidas.existePartida()) {
+      limpiarPantalla();
+      System.out.println("\n═══ ADVERTENCIA ═══");
+      System.out.println("Ya existe una partida guardada." +
+              "\nSi creas una nueva, el anterior será eliminado." +
+              "\n¿Deseas continuar? (s/n)");
+
+      String confirmacion = scanner.nextLine();
+
+      if (!confirmacion.equalsIgnoreCase("s")) {
+        return;
+      }
+    }
+
     limpiarPantalla();
     System.out.println("╔════════════════════════════════════╗");
     System.out.println("║        CREACIÓN DE PERSONAJE       ║");
@@ -78,8 +97,16 @@ public class Main {
       case "1" -> "Hombre";
       case "2" -> "Mujer";
       case "3" -> "Otro";
+      case "4" -> "Doble Elefante Telepata De Guerra";
       default -> "Indefinido";
     };
+
+    // Stats base (0-20)
+    int cordura = 10;
+    int carisma = 5;
+    int intimidacion = 5;
+    int inteligencia = 5;
+    int suerte = 5;
 
     // Seleccionar clase
     System.out.println("\nClase:");
@@ -89,13 +116,6 @@ public class Main {
     System.out.println("4. ejemplo4 (Intimidación+3, Cordura+2)");
     System.out.print("Elige: ");
     String claseOpcion = scanner.nextLine();
-
-    // Stats base (0-20)
-    int cordura = 10;
-    int carisma = 5;
-    int intimidacion = 5;
-    int inteligencia = 5;
-    int suerte = 5;
 
     String clase;
     switch (claseOpcion) {
@@ -128,20 +148,108 @@ public class Main {
             intimidacion, inteligencia, suerte);
 
     situacionActual = 0;
-    System.out.println("\n" + jugador);
-    System.out.println("\n¡Personaje creado! Tu aventura comienza...");
+
+    // GUARDAR PERSONAJE EN JSON
+    boolean guardado = GestorPartidas.guardarPersonaje(jugador);
+
+    limpiarPantalla();
+    System.out.println("╔════════════════════════════════════╗");
+    System.out.println("║       PERSONAJE CREADO             ║");
+    System.out.println("╚════════════════════════════════════╝\n");
+    System.out.println(jugador);
+
+    if (guardado) {
+      System.out.println("\nPersonaje guardado correctamente");
+    } else {
+      System.out.println("\nERROR AL GUARDAR LA PARTIDA");
+    }
+
+    System.out.println("\n¡Tu aventura comienza...");
     esperarEnter();
 
     // Iniciar el bucle del juego
-    // jugar(); PROXIMAMENTE
+     jugar();
+  }
+
+  private static void cargarPartida(){
+    limpiarPantalla();
+
+    if (!GestorPartidas.existePartida()){
+      System.out.println("\n╔════════════════════════════════════╗");
+      System.out.println("║     NO HAY PARTIDA GUARDADA        ║");
+      System.out.println("╚════════════════════════════════════╝");
+      System.out.println("\nDebes crear un personaje primero.");
+      esperarEnter();
+      return;
+    }
+
+    // Mostrar información del personaje guardado
+    String info = GestorPartidas.obtenerInfoPartida();
+    if (info != null) {
+      System.out.println(info);
+    }
+
+    System.out.print("\n¿Deseas cargar este personaje? (s/n): ");
+    String confirmacion = scanner.nextLine();
+
+    if (!confirmacion.equalsIgnoreCase("s")) {
+      return;
+    }
+
+    // Cargar personaje
+    jugador = GestorPartidas.cargarPersonaje();
+
+    if (jugador != null) {
+      limpiarPantalla();
+      System.out.println("╔════════════════════════════════════╗");
+      System.out.println("║      PERSONAJE CARGADO             ║");
+      System.out.println("╚════════════════════════════════════╝\n");
+      System.out.println(jugador);
+      System.out.println("\nPartida cargada correctamente");
+      System.out.println("\n¡Tu aventura continúa...");
+      esperarEnter();
+
+      situacionActual = 0; // Por ahora siempre empieza desde 0
+
+      // jugar(); // PROXIMAMENTE
+    } else {
+      System.out.println("\nERROR AL CARGAR LA PARTIDA");
+      esperarEnter();
+    }
+  }
+
+  private static void verEstadisticas() {
+    limpiarPantalla();
+    System.out.println("╔════════════════════════════════════╗");
+    System.out.println("║         ESTADÍSTICAS               ║");
+    System.out.println("╚════════════════════════════════════╝\n");
+
+    if (!GestorPartidas.existePartida()) {
+      System.out.println("ALERTA: NO HAY NINGUNA PARTIDA GUARDADA.");
+    } else {
+      String info = GestorPartidas.obtenerInfoPartida();
+      if (info != null) {
+        System.out.println(info);
+      }
+    }
+
+    esperarEnter();
+
+    /* MOSTRAR INFO DE BDD DE OTROS JUGADORES? */
   }
 
   private static void jugar() {
     while (jugador.estaVivo() && situacionActual < 25) {
       limpiarPantalla();
-      //mostrarEstadoJugador();
+      mostrarEstadoJugador();
 
       // Obtener la entidad actual (monstruo o evento)
+      AbuelaGalletas agregarGalletas = new AbuelaGalletas();
+      System.out.println(agregarGalletas.getDescripcion());
+      System.out.println(agregarGalletas.getPregunta());
+
+      System.out.println(agregarGalletas.getInteraccionesBase());
+
 
       // Mostrar descripción de la entidad
 
@@ -155,8 +263,6 @@ public class Main {
   }
 
   private static void mostrarEstadoJugador() {
-    /*MODIFICAR TABLA CON COLORES Y SIN EMOJIS*/
-
     System.out.println("\n┌─────────────── " + jugador.getNombre().toUpperCase() +
             " (" + jugador.getClase() + ") ───────────────┐");
     System.out.println("│ ♥ Cordura: " + jugador.getCordura() + "/20" +
@@ -169,23 +275,10 @@ public class Main {
     System.out.println("└" + "─".repeat(58) + "┘");
   }
 
-  private static void mostrarInventario() {
-    /*Cargar de BDD*/
-  }
-
-  private static void verEstadisticas() {
-    limpiarPantalla();
-    System.out.println("╔════════════════════════════════════╗");
-    System.out.println("║         ESTADÍSTICAS               ║");
-    System.out.println("╚════════════════════════════════════╝\n");
-
-    /*BDD*/
-
-    esperarEnter();
-  }
-
   private static void limpiarPantalla() {
-    /*NO SÉ COMO HACER ESTO AUN*/
+    /*NO SÉ COMO HACER ESTO AUN, NO FUNCIONA*/
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
   }
 
   private static void esperarEnter() {
@@ -193,6 +286,7 @@ public class Main {
     scanner.nextLine();
   }
 
+  // SIMULACIÓN PANTALLA DE CARGA
   private static void mostrarPantallaCarga() {
     limpiarPantalla();
 

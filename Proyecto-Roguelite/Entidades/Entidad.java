@@ -6,7 +6,6 @@ import java.util.List;
 public abstract class Entidad {
 
     //Atributos de Identificación y Narrativa
-
     protected final String id;
     protected final String nombre;
     protected final String descripcion;
