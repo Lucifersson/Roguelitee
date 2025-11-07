@@ -1,11 +1,9 @@
 package Principal;
 
-import Entidades.Criatura.HombreHongo;
 import Entidades.Criatura.Suegra;
 import Entidades.Entidad;
 import Entidades.Eventos.AbuelaGalletas;
 import Entidades.Eventos.CajaTexto;
-import Entidades.Eventos.PuenteRoto;
 import Entidades.Jugador;
 
 import java.util.ArrayList;
@@ -80,6 +78,9 @@ public class Main {
       String confirmacion = scanner.nextLine();
 
       if (!confirmacion.equalsIgnoreCase("s")) {
+        if (!confirmacion.equalsIgnoreCase("n")) {
+          System.out.println("ERROR: Opción inválida");
+        }
         return;
       }
     }
@@ -118,32 +119,32 @@ public class Main {
 
     // Seleccionar clase
     System.out.println("\nClase:");
-    System.out.println("1. ejemplo1 (Int+3, Carisma+2)");
-    System.out.println("2. ejemplo2 (Suerte+3, Intimidación+2)");
-    System.out.println("3. ejemplo3 (Carisma+3, Inteligencia+2)");
-    System.out.println("4. ejemplo4 (Intimidación+3, Cordura+2)");
+    System.out.println("1. Pícaro (Carisma+3, Intimidación+2)");
+    System.out.println("2. Mago (Suerte+3, Inteligencia+2)");
+    System.out.println("3. Clérigo (Cordura+3, Suerte+2)");
+    System.out.println("4. Guerrero (Intimidación+3, Cordura+2)");
     System.out.print("Elige: ");
     String claseOpcion = scanner.nextLine();
 
     String clase;
     switch (claseOpcion) {
       case "1":
-        clase = "ejemplo1";
-        inteligencia += 3;
-        carisma += 2;
-        break;
-      case "2":
-        clase = "ejemplo2";
-        suerte += 3;
+        clase = "Pícaro";
+        carisma += 3;
         intimidacion += 2;
         break;
-      case "3":
-        clase = "ejemplo3";
-        carisma += 3;
+      case "2":
+        clase = "Mago";
+        suerte += 3;
         inteligencia += 2;
         break;
+      case "3":
+        clase = "Clérigo";
+        cordura += 3;
+        suerte += 2;
+        break;
       case "4":
-        clase = "ejemplo4";
+        clase = "Guerrero";
         intimidacion += 3;
         cordura += 2;
         break;
@@ -162,7 +163,7 @@ public class Main {
 
     limpiarPantalla();
     System.out.println("╔════════════════════════════════════╗");
-    System.out.println("║       PERSONAJE CREADO             ║");
+    System.out.println("║        PERSONAJE CREADO            ║");
     System.out.println("╚════════════════════════════════════╝\n");
     System.out.println(jugador);
 
@@ -172,7 +173,7 @@ public class Main {
       System.out.println("\nERROR AL GUARDAR LA PARTIDA");
     }
 
-    System.out.println("\n¡Tu aventura comienza...");
+    System.out.println("\n¡Tu aventura comienza!");
     esperarEnter();
 
     // Iniciar el bucle del juego
@@ -201,6 +202,9 @@ public class Main {
     String confirmacion = scanner.nextLine();
 
     if (!confirmacion.equalsIgnoreCase("s")) {
+      if (!confirmacion.equalsIgnoreCase("n")) {
+        System.out.println("ERROR: Opción inválida");
+      }
       return;
     }
 
@@ -210,28 +214,26 @@ public class Main {
     if (jugador != null) {
       limpiarPantalla();
       System.out.println("╔════════════════════════════════════╗");
-      System.out.println("║      PERSONAJE CARGADO             ║");
+      System.out.println("║         PERSONAJE CARGADO          ║");
       System.out.println("╚════════════════════════════════════╝\n");
       System.out.println(jugador);
       System.out.println("\nPartida cargada correctamente");
-      System.out.println("\n¡Tu aventura continúa...");
+      System.out.println("\n¡Tu aventura comienza!");
       esperarEnter();
 
       situacionActual = 0; // Por ahora siempre empieza desde 0
 
-      // jugar(); // PROXIMAMENTE
+      jugar();
     } else {
       System.out.println("\nERROR AL CARGAR LA PARTIDA");
       esperarEnter();
     }
-
-    jugar();
   }
 
   private static void verEstadisticas() {
     limpiarPantalla();
     System.out.println("╔════════════════════════════════════╗");
-    System.out.println("║         ESTADÍSTICAS               ║");
+    System.out.println("║            ESTADÍSTICAS            ║");
     System.out.println("╚════════════════════════════════════╝\n");
 
     if (!GestorPartidas.existePartida()) {
@@ -245,21 +247,20 @@ public class Main {
 
     esperarEnter();
 
-    /* MOSTRAR INFO DE BDD DE OTROS JUGADORES? */
+    /* MOSTRAR INFO DE BDD DE OTROS JUGADORES - RANKING */
   }
 
   private static void jugar() {
-    // Lista con todos los eventos posibles
+    // Lista con todos los eventos posibles (De momento una prueba con 3)
     List<Entidad> eventosDisponibles = new ArrayList<>();
     eventosDisponibles.add(new AbuelaGalletas());
     eventosDisponibles.add(new Suegra());
     eventosDisponibles.add(new CajaTexto());
-    // hay que modificar esto (en el pdf pone que se sacan desde json)
 
     // Mezclamos aleatoriamente
     Collections.shuffle(eventosDisponibles);
 
-    // Bucle del juego (ej: 25 eventos y finaliza)
+    // Bucle del juego (ej: 25 eventos y finaliza) (De momento una prueba con 3)
     List<Entidad> eventosPartida = eventosDisponibles.subList(0, Math.min(3, eventosDisponibles.size()));
 
     for (Entidad evento : eventosPartida) {
@@ -268,7 +269,6 @@ public class Main {
       limpiarPantalla();
       mostrarEstadoJugador();
 
-      System.out.println("─────────────────────────────");
       System.out.println("Evento: " + evento.getNombre());
       System.out.println(evento.getDescripcion());
       System.out.println();
@@ -331,6 +331,7 @@ public class Main {
     System.out.println("└" + "─".repeat(59) + "┘");
   }
 
+  // FUNCIONES INTERNAS
   private static void limpiarPantalla() {
     /*NO SÉ COMO HACER ESTO AUN, NO FUNCIONA*/
     System.out.print("\033[H\033[2J");

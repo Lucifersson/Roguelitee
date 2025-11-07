@@ -31,20 +31,22 @@ public class AbuelaGalletas extends Entidad {
         switch (seleccion) {
             case "1":
                 if (jugador.getCordura() < 5) {
-                    jugador.reducirCarisma(2);
-                    return "La galleta no estaba bien horneada. Huyes buscando un baño urgentemente. No llegas. **Pierdes 2 de Carisma**";
+                    jugador.reducirCordura(2);
+                    return "La galleta no estaba bien horneada. Huyes buscando un baño urgentemente. No llegas. **Pierdes 2 de Cordura**";
                 } else {
                     return "Cruje perfecta. Es la mejor galleta que has probado.\n" +
                             "De pronto, otra abuela aparece y te ofrece otra. Y otra.\n" +
                             "El suelo se cubre de galletas. **Consigues el logro 'Demasiadas Galletas'**";
                 }
             case "2":
-                if (jugador.getGenero().equals("Masculino")) {
-                    return "La abuela te escucha atentamente, pero te pone el dedo en la boca y te manda callar.\n" +
-                            "Está en la otra acera";
-                }else{
+                if (jugador.getGenero().equals("Mujer")) {
+                    jugador.aumentarCarisma(2);
                     return "La abuela te escucha atentamente y te sigue el juego.\n" +
-                            "Parece que la tienes en el bote.";
+                            "Parece que la tienes en el bote. *Ganas 2 de Carisma**";
+                }else{
+                    jugador.reducirCarisma(2);
+                    return "La abuela te escucha atentamente, pero te pone el dedo en la boca y te manda callar.\n" +
+                            "Está en la otra acera **Pierdes 2 de Carisma**";
                 }
             case "3":
                 jugador.reducirCordura(2);
