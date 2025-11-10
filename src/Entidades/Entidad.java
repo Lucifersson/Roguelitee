@@ -45,7 +45,7 @@ public abstract class Entidad {
         List<String> interacciones = getInteraccionesBase();
 
         //Obtener la interacción extra calculadas en tiempo de ejecución
-        interacciones.addAll(calcularInteraccioneExtra(jugador));
+        interacciones.addAll(calcularInteraccionExtra(jugador, this.id));
 
         return interacciones;
     }
@@ -57,7 +57,7 @@ public abstract class Entidad {
 
     // Lógica de Interaccion Extra delegada (Calculable)
 
-    protected final List<String> calcularInteraccioneExtra(Jugador jugador){
+    protected final List<String> calcularInteraccionExtra(Jugador jugador, String id){
         //Por defecto no hay interacciones extra
         return new ArrayList<>(); // Placeholder
     }

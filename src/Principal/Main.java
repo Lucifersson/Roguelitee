@@ -281,6 +281,8 @@ public class Main {
       for (int i = 0; i < opciones.size(); i++) {
         System.out.println(opciones.get(i));
       }
+      /* OPCION EXTRA BDD - PAU A CURRAR */
+      //conectarseBDD()
 
       System.out.print("\nElige una opción: ");
       String eleccion = scanner.nextLine();

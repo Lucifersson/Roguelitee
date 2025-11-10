@@ -28,6 +28,7 @@ public class AbuelaGalletas extends Entidad {
     }
 
     public String interactuar(Jugador jugador, String seleccion) {
+
         switch (seleccion) {
             case "1":
                 if (jugador.getCordura() < 5) {
