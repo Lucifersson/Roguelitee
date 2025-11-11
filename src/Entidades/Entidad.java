@@ -47,7 +47,13 @@ public abstract class Entidad {
         List<String> interacciones = getInteraccionesBase();
 
         //Obtener la interacción extra calculadas en tiempo de ejecución
-        interacciones.addAll(calcularInteraccionExtra(jugador, this.id));
+        ArrayList<ArrayList<String>> listaExtra = calcularInteraccionExtra(jugador, this.id);
+
+        if (!listaExtra.isEmpty()) {
+            for (ArrayList<String> extra : listaExtra) {
+                interacciones.add(extra.get(1));
+            }
+        }
 
         return interacciones;
     }
@@ -59,16 +65,12 @@ public abstract class Entidad {
 
     // Lógica de Interaccion Extra delegada (Calculable)
 
-    protected final List<String> calcularInteraccionExtra(Jugador jugador, String id){
+    protected final ArrayList<ArrayList<String>> calcularInteraccionExtra(Jugador jugador, String id){
         /* "1. Comer una galleta" <- El arraylist debe devolver solo el enunciado*/
-        List<String> interaccionesExtra = new ArrayList<>();
-
-        /*BDD- Pau*/
-
+        ArrayList<ArrayList<String>> interaccionesExtra = BBDD.BBDD.conectarBaseDatos(jugador, id);
 
         this.cantExtra = interaccionesExtra.size();
         return interaccionesExtra;
-
     }
 
 }

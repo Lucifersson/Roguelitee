@@ -1,0 +1,14 @@
+1. Abrir terminal aquí y ejecutar el script (os he metido un virus gordo)
+(se ejecuta con: bash script.sh)
+2. Cuando acabe, en el escritorio se creará un archivo llamado contrasenyaTemp.txt donde está la contraseña temporal que ha creado para root en la base de datos.
+3. Abrir terminal en home (~) y hacer cd en MySqlServer.
+4. Ejecutar: mysql/bin/mysqld --datadir=../mysql_data --socket=/tmp/mysql.sock --port=3307 &
+5. Darle a control+c cuando se enganche.
+6. Ejecutar: mysql/bin/mysql -u root -p --socket=/tmp/mysql.sock --port=3307
+7. En la interfaz de sql, introduce el comando: ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roguelitee';
+8. Ejecuta: FLUSH PRIVILEGES;
+9. Ejecuta: exit
+10. Pon el archivo script.sql en el escritorio.
+11. Ejecuta: mysql/bin/mysql -u root -p --socket=/tmp/mysql.sock --port=3307 < ~/Escriptori/script.sql
+12. Entra en IntelliJ, al proyecto Roguelitee. Abre la rueda arriba a la derecha y dale a Project Structure, luego a modules y luego al +. JARs y directories, abrir la carpeta BBDD dentro del proyecto y darle a
+mysql-connector-j-9.5.0.jar, luego marcarlo, darle a aplicar y a aceptar.

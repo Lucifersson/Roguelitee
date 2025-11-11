@@ -3,6 +3,8 @@ package Entidades;// Se asumen estas importaciones necesarias
 // import com.roguelike.juego.Encuentro; 
 // import com.roguelike.juego.Terminal; // Para la salida en consola
 
+import java.util.List;
+
 /**
  * Clase base (Abstracta) para todos los objetos (Items) del juego.
  * Define la estructura y los métodos de interacción para todos los items,
@@ -16,7 +18,7 @@ public abstract class Item {
 	 * El ID único del objeto en la base de datos MySQL (para carga de Data
 	 * Maestra).
 	 */
-	protected int idMySQL;
+	protected String idMySQL;
 
 	/** El nombre del objeto, mostrado en la terminal. */
 	protected String nombre;
@@ -54,8 +56,8 @@ public abstract class Item {
 	 * @param esActivador  Indica si tiene interacción especial en encuentros.
 	 * @param esConsumible Indica si el item se destruye al usarlo.
 	 */
-	public Item(int idMySQL, String nombre, String descripcion, int valor, boolean esActivador,
-			boolean esConsumible) {
+	public Item(String idMySQL, String nombre, String descripcion, int valor, boolean esActivador,
+                boolean esConsumible) {
 		this.idMySQL = idMySQL;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -107,7 +109,7 @@ public abstract class Item {
 		return nombre + " (Valor: " + valor + (esConsumible ? " | Consumible)" : " | Persistente)");
 	}
 
-	public int getIdMySQL() {
+	public String getIdMySQL() {
 		return idMySQL;
 	}
 
