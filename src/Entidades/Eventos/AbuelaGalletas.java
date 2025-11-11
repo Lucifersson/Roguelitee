@@ -28,7 +28,6 @@ public class AbuelaGalletas extends Entidad {
     }
 
     public String interactuar(Jugador jugador, String seleccion) {
-
         switch (seleccion) {
             case "1":
                 if (jugador.getCordura() < 5) {
@@ -59,7 +58,16 @@ public class AbuelaGalletas extends Entidad {
                 return "Al intentar apagar uno, una abuela te agarra la mano con fuerza.\n" +
                         "Te mira con ojos llenos de tristeza... **Ganas 2 de Intimidación**";
             default:
-                return "No entiendes bien qué hacer.";
+                interaccionExtra(jugador, seleccion, cantExtra);
+        }
+        return "No entiendes bien qué hacer";
+    }
+
+    public String interaccionExtra (Jugador jugador, String seleccion, int cantExtra) {
+        if (seleccion.equals("5")) {
+            return "Pasa algo";
+        }else {
+            return "No entiendes bien qué hacer.";
         }
     }
 }

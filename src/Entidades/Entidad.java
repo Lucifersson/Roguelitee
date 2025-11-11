@@ -9,15 +9,17 @@ public abstract class Entidad {
     protected final String id;
     protected final String nombre;
     protected final String descripcion;
+    protected int cantExtra;
 
     //TEXTO DIÁLOGO O LA PREGUNTA PRINCIPAL DE LA ENTIDAD
     protected final String pregunta;
 
     //Constructor
-    public Entidad(String id, String nombre, String descripcion,String pregunta) {
+    public Entidad(String id, String nombre, String descripcion, String pregunta) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.cantExtra = 0; /*Por defecto a 0*/
         this.pregunta = pregunta;
     }
 
@@ -58,8 +60,15 @@ public abstract class Entidad {
     // Lógica de Interaccion Extra delegada (Calculable)
 
     protected final List<String> calcularInteraccionExtra(Jugador jugador, String id){
-        //Por defecto no hay interacciones extra
-        return new ArrayList<>(); // Placeholder
+        /* "1. Comer una galleta" <- El arraylist debe devolver solo el enunciado*/
+        List<String> interaccionesExtra = new ArrayList<>();
+
+        /*BDD- Pau*/
+
+
+        this.cantExtra = interaccionesExtra.size();
+        return interaccionesExtra;
+
     }
 
 }
