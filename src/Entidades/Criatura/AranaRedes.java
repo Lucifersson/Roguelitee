@@ -1,0 +1,49 @@
+package Entidades.Criatura;
+
+import Entidades.Entidad;
+import Entidades.Jugador;
+import java.util.Arrays;
+import java.util.List;
+
+public class AranaRedes extends Entidad {
+
+    private final int danoAtaqueMax = 10;
+    private final int danoPegajosoMin = 5;
+
+    public AranaRedes() {
+        super("ARANA_REDES", "Araña de Redes", "Una araña que teje redes plateadas y pegajosas.", "Una enorme red te bloquea. La Araña te mira fijamente. ¿Qué harás?");
+    }
+
+    @Override
+    public List<String> getInteraccionesBase() {
+        return Arrays.asList(
+                "1. Intentar romper la red con las manos",           // Daño Máximo
+                "2. Lanzarle una antorcha",                         // Daño Mínimo
+                "3. Engrasar tus manos y cortar la red lentamente",  // Éxito
+                "4. Esperar a que se vaya"                          // Pérdida de turno
+        );
+    }
+
+    @Override
+    public String interactuar(Jugador jugador, String seleccion) {
+
+        switch (seleccion) {
+            case "1. Intentar romper la red con las manos":
+                jugador.reducirCordura(danoAtaqueMax);
+                return "Te enredas totalmente en la red. El pánico te hace perder la cabeza. Pierdes **" + danoAtaqueMax + " de Cordura**.";
+
+            case "2. Lanzarle una antorcha":
+                jugador.reducirCordura(danoPegajosoMin);
+                return "El fuego no la asusta. Ella te lanza una hebra pegajosa que te ensucia. Pierdes **" + danoPegajosoMin + " de Cordura**.";
+
+            case "3. Engrasar tus manos y cortar la red lentamente":
+                return "El aceite hace que el corte sea fácil. Logras atravesar la red sin hacer ruido. ¡Encuentro evadido!";
+
+            case "4. Esperar a que se vaya":
+                return "La araña no se mueve. Pierdes la esperanza y un turno completo.";
+
+            default:
+                return "Error de acción.";
+        }
+    }
+}
