@@ -27,58 +27,47 @@ public class Logro {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public String getPista() {
         return pista;
     }
-
     public void setPista(String pista) {
         this.pista = pista;
     }
-
     public String getCategoria() {
         return categoria;
     }
-
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
     public boolean isOculto() {
         return oculto;
     }
-
     public void setOculto(boolean oculto) {
         this.oculto = oculto;
     }
-
     public boolean isDesbloqueado() {
         return desbloqueado;
     }
-
     public void setDesbloqueado(boolean desbloqueado) {
         this.desbloqueado = desbloqueado;
     }
+
+    public void marcarDesbloqueado() { this.desbloqueado = true; }
 
     @Override
     public String toString() {

@@ -5,6 +5,7 @@ import Entidades.Entidad;
 import Entidades.Eventos.AbuelaGalletas;
 import Entidades.Eventos.CajaTexto;
 import Entidades.Jugador;
+import Entidades.Sistema.GestorLogros;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +21,7 @@ public class Main {
     try {
       // iniciar sistema de guardado
       GestorPartidas.inicializar();
+      GestorLogros.inicializar();
 
       // Mostrar pantalla de carga al inicio
       mostrarPantallaCarga();
@@ -41,7 +43,8 @@ public class Main {
       System.out.println("\n1. Nueva partida");
       System.out.println("2. Cargar partida");
       System.out.println("3. Ver estadísticas");
-      System.out.println("4. Salir");
+      System.out.println("4. Libro de Logros");
+      System.out.println("5. Salir");
       System.out.print("\nElige una opción: ");
 
       opcion = scanner.nextLine();
@@ -56,7 +59,12 @@ public class Main {
         case "3" :
           verEstadisticas();
           break;
-        case "4" :
+        case "4":
+          limpiarPantalla();
+          GestorLogros.mostrarLogros();
+          esperarEnter();
+          break;
+        case "5" :
           System.out.println("\n¿Ya te vas? ¡Hasta la próxima!");
           break;
         default:
@@ -297,11 +305,16 @@ public class Main {
 
       // Verificar si el jugador sigue vivo
       if (!jugador.estaVivo()) {
-        System.out.println("\nTu mente no soporta más... has perdido toda cordura.");
         System.out.println("💀 GAME OVER 💀");
+        System.out.println("Has perdido la cordura por completo...");
+        System.out.println("Tus logros se han guardado.");
+        GestorLogros.guardarProgreso();
         esperarEnter();
         return;
       }
+
+      // Verificar logros automáticos
+      GestorLogros.verificarLogroAutomatico(jugador, situacionActual);
 
       esperarEnter();
       situacionActual++;
@@ -316,6 +329,8 @@ public class Main {
     }else{
       System.out.println("💀 GAME OVER 💀");
       System.out.println("Has perdido la cordura por completo...");
+      System.out.println("Tus logros se han guardado.");
+      GestorLogros.guardarProgreso();
     }
     esperarEnter();
   }
