@@ -9,7 +9,7 @@ public class DiarioPersonal extends Item {
 	 */
 	public DiarioPersonal() {
 		super(
-				"ITEM_DIARIO_001", // idMySQL
+				"ITEM_DIARIO", // idMySQL
 				"Diario Personal", // nombre
 				"Un libro de cuero gastado con notas privadas. Fomenta la calma y el análisis.",
 				75, // valor (Bajo, objeto inicial o común)
