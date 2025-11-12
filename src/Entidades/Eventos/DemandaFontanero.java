@@ -1,6 +1,7 @@
 package Entidades.Eventos;
 
 import Entidades.Entidad;
+import Entidades.Item;
 import Entidades.Jugador;
 
 import java.util.Arrays;

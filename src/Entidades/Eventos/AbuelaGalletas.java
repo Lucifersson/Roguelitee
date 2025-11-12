@@ -64,10 +64,12 @@ public class AbuelaGalletas extends Entidad {
     }
 
     public String interaccionExtra (Jugador jugador, String seleccion, int cantExtra) {
-        if (seleccion.equals("5")) {
-            return "Pasa algo";
-        }else {
-            return "No entiendes bien qué hacer.";
+        if (cantExtra > 0) {
+            if (seleccion.equals("5")) {
+                return "Pasa algo";
+            }
         }
+        return "No entiendes bien qué hacer.";
+
     }
 }

@@ -1,6 +1,5 @@
 package BBDD;
 
-import Entidades.Item;
 import Entidades.Jugador;
 
 import java.sql.*;
