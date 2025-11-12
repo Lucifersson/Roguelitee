@@ -30,18 +30,18 @@ public class AutomataRoto extends Entidad {
     @Override
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
-            case "1. Intentar tumbarlo de un empujón":
+            case "1":
                 jugador.reducirCordura(danoMax);
                 return "Tu empujón solo lo enfurece. Te electrocuta con una descarga fuerte. **Recibes " + danoMax + " de daño.**";
 
-            case "2. Tirarle una tuerca a sus circuitos":
+            case "2":
                 jugador.reducirCordura(danoMin);
                 return "Fallaste el tiro. La tuerca rebota y te golpea en la cabeza. **Recibes " + danoMin + " de daño.**";
 
-            case "3. Darle una Orden en Latín":
+            case "3":
                 return "El autómata se queda paralizado por un momento, emite un *BEEP* y vuelve a su ruta. Ganas un turno libre para pasar.";
 
-            case "4. Leer el Manual del Robot en voz alta":
+            case "4":
                 return "Te saltaste un paso vital del manual. El autómata te confunde con su jerga robótica. Pierdes un turno.";
             default:
                 return interaccionExtra(jugador, seleccion, this.eventosExtra);
@@ -50,17 +50,32 @@ public class AutomataRoto extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "3") {
+                    jugador.aumentarSuerte(3);
+                    return "Tiras la moneda al aire. No sabes muy bien como pero en cuanto aterriza, el robot tropieza, \nse cae al suelo  y balbucea algo sobre codificar con microprocesador x264 antes de apagarse por completo. \nDesde luego te sientes más afortunado.**+3 suerte**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "3") {
+                    jugador.aumentarSuerte(3);
+                    return "Tiras la moneda al aire. No sabes muy bien como pero en cuanto aterriza, el robot tropieza, \nse cae al suelo  y balbucea algo sobre codificar con microprocesador x264 antes de apagarse por completo. \nDesde luego te sientes más afortunado.**+3 suerte**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "3") {
+                    jugador.aumentarSuerte(3);
+                    return "Tiras la moneda al aire. No sabes muy bien como pero en cuanto aterriza, el robot tropieza, \nse cae al suelo  y balbucea algo sobre codificar con microprocesador x264 antes de apagarse por completo. \nDesde luego te sientes más afortunado.**+3 suerte**";
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
-
+                }
             }
         }
         return "No entiendes bien qué hacer.";

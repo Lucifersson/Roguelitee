@@ -30,21 +30,21 @@ public class HombreHongo extends Entidad {
 	@Override
 	public String interactuar(Jugador jugador, String seleccion) {
 		switch (seleccion) {
-			case "1. Darle un Fuerte Pisotón":
+			case "1":
 				jugador.reducirCordura(danoMax);
 				return "El pisotón falla y tropiezas en el barro. Recibes **" + danoMax
 						+ " de daño** por esporas concentradas.";
 
-			case "2. Pinchazo Rápido con un Dedo":
+			case "2":
 				jugador.reducirCordura(danoMin);
 				return "Fallaste la precisión y te pinchas con una seta. Recibes **" + danoMin
 						+ " de daño** por veneno.";
 
-			case "3. Emitir un Sonido de 'Paz y Amor'":
+			case "3":
 				// El castigo aquí es que el hongo se aprovecha de tu ingenuidad
 				return "Tu aura de calma lo tranquiliza. El Hombre Hongo se retira, pero te ha robado una moneda.";
 
-			case "4. Mantener la Respiración y Quedarse Quieto":
+			case "4":
 				return "Consigues quedarte perfectamente inmóvil y sin respirar. El Hongo te ignora y puedes pasar.";
             default:
                 return interaccionExtra(jugador, seleccion, this.eventosExtra);
@@ -53,17 +53,29 @@ public class HombreHongo extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";

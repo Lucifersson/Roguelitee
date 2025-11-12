@@ -30,18 +30,18 @@ public class ParedGelatina extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Empujarla con toda tu fuerza":
+            case "1":
                 jugador.reducirCordura(danoResistenciaMax);
                 return "Tu fuerza es absorbida. La frustración es abrumadora. Pierdes **" + danoResistenciaMax + " de Cordura**.";
 
-            case "2. Tocarla con un dedo para comprobar su textura":
+            case "2":
                 jugador.reducirCordura(danoPegajosidadMin);
                 return "Tu dedo se pega ligeramente. El asco te causa una leve perturbación. Pierdes **" + danoPegajosidadMin + " de Cordura**.";
 
-            case "3. Dejarle un regalo con la esperanza de que se aparte":
+            case "3":
                 return "La pared absorbe el regalo. Te ha robado tu objeto más valioso.";
 
-            case "4. Lanzarle ácido (inventario)":
+            case "4":
                 return "El ácido disuelve rápidamente la pared. El camino queda libre. ¡Encuentro evadido!";
 
             default:
@@ -51,17 +51,29 @@ public class ParedGelatina extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";

@@ -30,18 +30,18 @@ public class PortalDuda extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Intentar saltar directamente a través del portal":
+            case "1":
                 jugador.reducirCordura(danoDudaMax);
                 return "El portal te escupe de vuelta. Sientes la nada. La absoluta certeza de la duda te destroza. Pierdes **" + danoDudaMax + " de Cordura**.";
 
-            case "2. Mirar dentro y preguntarse 'qué es'":
+            case "2":
                 jugador.reducirCordura(danoVacioMin);
                 return "Sientes el vacío. La falta de propósito te perturba. Pierdes **" + danoVacioMin + " de Cordura**.";
 
-            case "3. Resolver un acertijo matemático simple en voz alta":
+            case "3":
                 return "La lógica pura destruye la incertidumbre del portal. Se disipa temporalmente. ¡Encuentro evadido!";
 
-            case "4. Esperar a que la duda se disipe":
+            case "4":
                 return "La espera solo aumenta tu incertidumbre. Pierdes un turno en un estado de parálisis mental.";
 
             default:
@@ -51,17 +51,29 @@ public class PortalDuda extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";

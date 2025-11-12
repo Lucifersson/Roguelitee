@@ -30,18 +30,18 @@ public class AranaRedes extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Intentar romper la red con las manos":
+            case "1":
                 jugador.reducirCordura(danoAtaqueMax);
                 return "Te enredas totalmente en la red. El pánico te hace perder la cabeza. Pierdes **" + danoAtaqueMax + " de Cordura**.";
 
-            case "2. Lanzarle una antorcha":
+            case "2":
                 jugador.reducirCordura(danoPegajosoMin);
                 return "El fuego no la asusta. Ella te lanza una hebra pegajosa que te ensucia. Pierdes **" + danoPegajosoMin + " de Cordura**.";
 
-            case "3. Engrasar tus manos y cortar la red lentamente":
+            case "3":
                 return "El aceite hace que el corte sea fácil. Logras atravesar la red sin hacer ruido. ¡Encuentro evadido!";
 
-            case "4. Esperar a que se vaya":
+            case "4":
                 return "La araña no se mueve. Pierdes la esperanza y un turno completo.";
 
             default:
@@ -51,17 +51,32 @@ public class AranaRedes extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
+                    jugador.aumentarInteligencia(2);
+                    return "Logras cortar la red con el cuchillo sin alertar a la araña. Te sientes bastante más inteligente de lo que eres. **+2 inteligencia**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
+                    jugador.aumentarInteligencia(2);
+                    return "Logras cortar la red con el cuchillo sin alertar a la araña. Te sientes bastante más inteligente de lo que eres. **+2 inteligencia**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
+                    jugador.aumentarInteligencia(2);
+                    return "Logras cortar la red con el cuchillo sin alertar a la araña. Te sientes bastante más inteligente de lo que eres. **+2 inteligencia**";
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
-
+                }
             }
         }
         return "No entiendes bien qué hacer.";

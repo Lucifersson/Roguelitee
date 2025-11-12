@@ -50,8 +50,10 @@ public abstract class Entidad {
         ArrayList<ArrayList<String>> listaExtra = calcularInteraccionExtra(jugador, this.id);
 
         if (!listaExtra.isEmpty()) {
+            int contador = 5;
             for (ArrayList<String> extra : listaExtra) {
-                interacciones.add(extra.get(1));
+                interacciones.add("\u001B[38;2;125;206;206m"+contador+". "+extra.get(1)+"\u001B[0m");
+                contador++;
             }
         }
 

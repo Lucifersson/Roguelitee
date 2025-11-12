@@ -1,4 +1,6 @@
-package Entidades;
+package Entidades.Items;
+
+import Entidades.Item;
 
 public class MonedaSuerte extends Item {
 

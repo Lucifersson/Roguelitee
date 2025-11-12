@@ -33,18 +33,18 @@ public class NieblaParpadeante extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Intentar seguir con la mirada sus movimientos":
+            case "1":
                 jugador.reducirCordura(danoVertigoMax);
                 return "Tu mente no puede procesar el parpadeo. El vértigo es intenso. Pierdes **" + danoVertigoMax + " de Cordura**.";
 
-            case "2. Lanzarle una roca al azar":
+            case "2":
                 jugador.reducirCordura(danoConfusionMin);
                 return "Fallaste. La niebla se ríe y te marea. Pierdes **" + danoConfusionMin + " de Cordura**.";
 
-            case "3. Cerrar los ojos y caminar en línea recta":
+            case "3":
                 return "Al eliminar el estímulo visual, tu mente se calma y logras atravesarla antes de que reaparezca. ¡Encuentro evadido!";
 
-            case "4. Esperar a que se disipe sola":
+            case "4":
                 return "Esperaste demasiado. La niebla te ha robado las pilas de tu linterna mientras te distraías.";
 
             default:
@@ -54,17 +54,29 @@ public class NieblaParpadeante extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";

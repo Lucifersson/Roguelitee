@@ -30,18 +30,18 @@ public class OrejaEscuchadora extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Susurrarle un secreto vergonzoso":
+            case "1":
                 jugador.reducirCordura(danoSecretoMax);
                 return "La Oreja grita tu secreto por todo el laberinto. La humillación te destruye. Pierdes **" + danoSecretoMax + " de Cordura**.";
 
-            case "2. Intentar golpearla con el puño":
+            case "2":
                 jugador.reducirCordura(danoMurmulloMin);
                 return "Tu puño rebota en su cartílago. El sonido sordo te aturde. Pierdes **" + danoMurmulloMin + " de Cordura**.";
 
-            case "3. Cantarle una canción infantil en voz alta":
+            case "3":
                 return "La Oreja no soporta la inocencia y se retrae asustada en el muro. ¡Encuentro evadido!";
 
-            case "4. Quedarse en silencio total":
+            case "4":
                 return "La Oreja espera impacientemente tu voz. Pierdes un turno en el tenso silencio.";
 
             default:
@@ -51,17 +51,29 @@ public class OrejaEscuchadora extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";

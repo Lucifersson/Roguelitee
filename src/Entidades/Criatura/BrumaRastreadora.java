@@ -30,18 +30,18 @@ public class BrumaRastreadora extends Entidad {
     @Override
     public String interactuar(Jugador jugador, String seleccion) {
         switch (seleccion) {
-            case "1. Tocar la Bruma por Curiosidad":
+            case "1":
                 jugador.reducirCordura(danoMax);
                 return "La Bruma te envuelve con furia, te quema con el frío. Recibes un golpe total de **" + danoMax + " de daño**.";
 
-            case "2. Cruzar Rápido por el Centro":
+            case "2":
                 jugador.reducirCordura(danoMin);
                 return "Te resbalas. La Bruma te salpica con escarcha, pero escapas rápido. Recibes **" + danoMin + " de daño**.";
 
-            case "3. Preguntarle si está Perdida":
+            case "3":
                 return "La Bruma te ignora, el frío te hace perder el equilibrio y caes al suelo. Pierdes un turno.";
 
-            case "4. Ponerse una Máscara y Caminar Lento":
+            case "4":
                 return "La máscara funciona a la perfección. La Bruma te rodea, pero te ignora. ¡Has evadido el peligro!";
             default:
                 return interaccionExtra(jugador, seleccion, this.eventosExtra);
@@ -50,17 +50,32 @@ public class BrumaRastreadora extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "4") {
+                    jugador.aumentarInteligencia(3);
+                    return "Te das cuenta de que estabas sobrereaccionando a la situación y te calmas. Pasas como si nada.**Ganas 3 de inteligencia**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "4") {
+                    jugador.aumentarInteligencia(3);
+                    return "Te das cuenta de que estabas sobrereaccionando a la situación y te calmas. Pasas como si nada.**Ganas 3 de inteligencia**";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "4") {
+                    jugador.aumentarInteligencia(3);
+                    return "Te das cuenta de que estabas sobrereaccionando a la situación y te calmas. Pasas como si nada.**Ganas 3 de inteligencia**";
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
-
+                }
             }
         }
         return "No entiendes bien qué hacer.";

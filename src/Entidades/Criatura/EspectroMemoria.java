@@ -34,19 +34,19 @@ public class EspectroMemoria extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Intentar darle un golpe 'fantasma'":
+            case "1":
                 jugador.reducirCordura(danoPsiquicoMax);
                 return "Tu puño lo atraviesa, pero la retroalimentación psíquica es brutal. Recibes un fuerte golpe mental de **" + danoPsiquicoMax + " de daño**.";
 
-            case "2. Cerrar los Ojos y Gritar muy fuerte":
+            case "2":
                 jugador.reducirCordura(danoPanicoMin);
                 return "Tu grito te deja exhausto y el Espectro se divierte con tu pánico. Recibes **" + danoPanicoMin + " de daño** psíquico.";
 
-            case "3. Contarle una Historia Aburrida":
+            case "3":
                 // Castigo: Pérdida de un recurso, el espectro se aburre y te roba algo por fastidiar.
                 return "El Espectro bosteza, se aburre con tu historia y te roba una posesión menor antes de desvanecerse.";
 
-            case "4. Intentar Recordar tu Tarea Pendiente":
+            case "4":
                 // Resultado: Éxito total. Enfocarse lo disipa.
                 return "Logras concentrarte en el dolor de cabeza que te da tu jefe. El Espectro se disipa por el shock de la rutina. ¡Encuentro evadido!";
 
@@ -57,17 +57,32 @@ public class EspectroMemoria extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "8") {
+                    jugador.aumentarInteligencia(3);
+                    return "Le lanzas la piedra. El fantasma revela su tapadera al apartarse para esquivarla. De una forma u otra lo sabías. Ganas 3 de inteligencia.";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "8") {
+                    jugador.aumentarInteligencia(3);
+                    return "Le lanzas la piedra. El fantasma revela su tapadera al apartarse para esquivarla. De una forma u otra lo sabías. Ganas 3 de inteligencia.";
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
 
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "8") {
+                    jugador.aumentarInteligencia(3);
+                    return "Le lanzas la piedra. El fantasma revela su tapadera al apartarse para esquivarla. De una forma u otra lo sabías. Ganas 3 de inteligencia.";
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
-
+                }
             }
         }
         return "No entiendes bien qué hacer.";

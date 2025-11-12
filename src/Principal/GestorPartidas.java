@@ -1,5 +1,6 @@
 package Principal;
 
+import Entidades.Item;
 import Entidades.Jugador;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class GestorPartidas {
 
             // Inventario
             json.append("  \"inventario\": [");
-            List<String> items = jugador.getInventario();
+            List<Item> items = jugador.getInventario();
             for (int i = 0; i < items.size(); i++) {
                 json.append("\"").append(items.get(i)).append("\"");
                 if (i < items.size() - 1) json.append(", ");

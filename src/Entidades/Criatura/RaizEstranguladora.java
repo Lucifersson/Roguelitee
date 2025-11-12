@@ -33,18 +33,18 @@ public class RaizEstranguladora extends Entidad {
     public String interactuar(Jugador jugador, String seleccion) {
 
         switch (seleccion) {
-            case "1. Tirar con todas tus fuerzas para soltarte":
+            case "1":
                 jugador.reducirCordura(danoPanicoMax);
                 return "Tu lucha solo aprieta el lazo. La sensación de asfixia te provoca pánico. Pierdes **" + danoPanicoMax + " de Cordura**.";
 
-            case "2. Cortarla con un cuchillo":
+            case "2":
                 jugador.reducirCordura(danoEsfuerzoMin);
                 return "La raíz se retuerce ante el dolor, y el esfuerzo mental te agota. Pierdes **" + danoEsfuerzoMin + " de Cordura**.";
 
-            case "3. Untarla con jarabe dulce":
+            case "3":
                 return "La raíz se confunde con el olor. Te suelta, pero pierdes el valioso frasco de jarabe.";
 
-            case "4. Quedarte quieto y esperar a que se relaje":
+            case "4":
                 return "Dejas de resistirte. La raíz se relaja, te suelta y se retrae. ¡Encuentro evadido!";
 
             default:
@@ -54,17 +54,29 @@ public class RaizEstranguladora extends Entidad {
 
     public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
         if (!eventosExtra.isEmpty()) {
-            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+            if (eventosExtra.size() != 2 && seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+            else if (seleccion.equals("5")) {
+                if (eventosExtra.get(0).get(0) == "1") {
 
+                }
+                else if (eventosExtra.get(0).get(0) == "2") {
+
+                }
             }
-            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+            else if (seleccion.equals("6")) {
+                if (eventosExtra.get(1).get(0) == "1") {
 
-            }
-            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+                }
+                else if (eventosExtra.get(1).get(0) == "2") {
 
+                }
             }
         }
         return "No entiendes bien qué hacer.";
