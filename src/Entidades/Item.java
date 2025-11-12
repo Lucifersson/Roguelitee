@@ -1,7 +1,7 @@
 package Entidades;// Se asumen estas importaciones necesarias
+
 // import com.roguelike.personaje.Personaje; 
 // import com.roguelike.juego.Encuentro; 
-// import com.roguelike.juego.Terminal; // Para la salida en consola
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public abstract class Item {
 	 * @param esConsumible Indica si el item se destruye al usarlo.
 	 */
 	public Item(String idMySQL, String nombre, String descripcion, int valor, boolean esActivador,
-                boolean esConsumible) {
+			boolean esConsumible) {
 		this.idMySQL = idMySQL;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
