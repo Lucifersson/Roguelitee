@@ -1,114 +1,88 @@
-package Entidades;// Se asumen estas importaciones necesarias
-
-// import com.roguelike.personaje.Personaje; 
-// import com.roguelike.juego.Encuentro; 
-
-import java.util.List;
+package Entidades;
 
 /**
- * Clase base (Abstracta) para todos los objetos (Items) del juego.
- * Define la estructura y los métodos de interacción para todos los items,
- * distinguiendo entre efectos directos (uso/consumo) y efectos de encuentro.
+ * Clase base para todos los objetos (Items) del juego.
+ * Los items actúan como modificadores pasivos permanentes de estadísticas
+ * mientras se encuentran en el inventario del Jugador.
+ *
+ * Esta clase no es abstracta y está lista para ser extendida por objetos
+ * concretos.
  */
-public abstract class Item {
+public class Item {
 
 	// --- Atributos de Identificación y Descripción ---
-
-	/**
-	 * El ID único del objeto en la base de datos MySQL (para carga de Data
-	 * Maestra).
-	 */
 	protected String idMySQL;
-
-	/** El nombre del objeto, mostrado en la terminal. */
 	protected String nombre;
-
-	/** Una descripción breve para el inventario o la tienda. */
 	protected String descripcion;
+	protected int valor; // Valor de compra/venta en la tienda
 
-	/** El valor del objeto para su compra o venta en la tienda. */
-	protected int valor;
-
-	// --- Atributos de Efecto (Modificadores) ---
-
-	/**
-	 * * Indica si el objeto desbloquea interacciones especiales.
-	 * Es clave para la "Comprobación de Interacción por Item" en el flujo del
-	 * encuentro.
-	 */
-	protected boolean esActivadorDeInteraccion;
-
-	/** Indica si el objeto se consume (desaparece del inventario) al ser usado. */
-	protected boolean esConsumible;
+	// --- Atributos de Modificación Pasiva de Estadísticas ---
+	// Valores de modificación que se aplican al Jugador.
+	protected int modCordura;
+	protected int modCarisma;
+	protected int modIntimidacion;
+	protected int modInteligencia;
+	protected int modSuerte;
 
 	// ------------------------------------------------------------------
 	// CONSTRUCTOR
 	// ------------------------------------------------------------------
 
 	/**
-	 * Constructor base para inicializar un objeto a partir de los datos cargados
-	 * desde MySQL.
+	 * Constructor base para inicializar un objeto Item con sus atributos y
+	 * modificadores.
 	 * 
-	 * @param idMySQL      ID de la base de datos.
-	 * @param nombre       Nombre del objeto.
-	 * @param descripcion  Descripción del objeto.
-	 * @param valor        Valor de compra/venta.
-	 * @param esActivador  Indica si tiene interacción especial en encuentros.
-	 * @param esConsumible Indica si el item se destruye al usarlo.
+	 * @param idMySQL         ID de la base de datos (clave).
+	 * @param nombre          Nombre del objeto.
+	 * @param descripcion     Descripción breve.
+	 * @param valor           Valor de compra/venta.
+	 * @param modCordura      Modificador de Cordura.
+	 * @param modCarisma      Modificador de Carisma.
+	 * @param modIntimidacion Modificador de Intimidación.
+	 * @param modInteligencia Modificador de Inteligencia.
+	 * @param modSuerte       Modificador de Suerte.
 	 */
-	public Item(String idMySQL, String nombre, String descripcion, int valor, boolean esActivador,
-			boolean esConsumible) {
+	public Item(String idMySQL, String nombre, String descripcion, int valor,
+			int modCordura, int modCarisma, int modIntimidacion,
+			int modInteligencia, int modSuerte) {
+
 		this.idMySQL = idMySQL;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.valor = valor;
-		this.esActivadorDeInteraccion = esActivador;
-		this.esConsumible = esConsumible;
+		this.modCordura = modCordura;
+		this.modCarisma = modCarisma;
+		this.modIntimidacion = modIntimidacion;
+		this.modInteligencia = modInteligencia;
+		this.modSuerte = modSuerte;
 	}
 
 	// ------------------------------------------------------------------
-	// MÉTODOS ABSTRACTOS CLAVE
+	// GETTERS
 	// ------------------------------------------------------------------
 
-	/**
-	 * 🟢 **MÉTODO ABSTRACTO REQUERIDO**
-	 * Define el efecto directo que ocurre cuando el jugador utiliza el objeto
-	 * (e.g., consumir una poción, leer un mapa, ganar Cordura).
-	 * 
-	 * @param personaje El objeto Personaje que usa el item.
-	 * @return true si el efecto fue aplicado con éxito (permite manejar fallos o
-	 *         requisitos).
-	 */
-	public abstract boolean aplicarEfectoDirecto(Jugador jugador);
-
-	/**
-	 * 🟡 **MÉTODO ABSTRACTO REQUERIDO**
-	 * Define cómo este item puede modificar o generar una interacción en un
-	 * Encuentro.
-	 * Esto se comprueba en el "Flujo de un Encuentro con NPC".
-	 * 
-	 * @param personaje El objeto Personaje.
-	 * @param encuentro El Encuentro actual (NPC, situación).
-	 * @return true si el item causó una modificación o interacción especial (pasa a
-	 *         la siguiente fase del flujo).
-	 */
-	public abstract boolean activarInteraccionEnEncuentro(Jugador jugador, Entidad evento);
-
-	// ------------------------------------------------------------------
-	// MÉTODOS PÚBLICOS Y GETTERS
-	// ------------------------------------------------------------------
-
-	/**
-	 * Devuelve una representación del objeto para mostrarlo en el
-	 * inventario/tienda.
-	 * 
-	 * @return String formateado.
-	 */
-	@Override
-	public String toString() {
-		return nombre + " (Valor: " + valor + (esConsumible ? " | Consumible)" : " | Persistente)");
+	// Getters para los modificadores (usados por la clase Jugador)
+	public int getModCordura() {
+		return modCordura;
 	}
 
+	public int getModCarisma() {
+		return modCarisma;
+	}
+
+	public int getModIntimidacion() {
+		return modIntimidacion;
+	}
+
+	public int getModInteligencia() {
+		return modInteligencia;
+	}
+
+	public int getModSuerte() {
+		return modSuerte;
+	}
+
+	// Getters para la información básica
 	public String getIdMySQL() {
 		return idMySQL;
 	}
@@ -125,7 +99,8 @@ public abstract class Item {
 		return valor;
 	}
 
-	public boolean esActivadorDeInteraccion() {
-		return esActivadorDeInteraccion;
+	@Override
+	public String toString() {
+		return nombre + " (Valor: " + valor + ")";
 	}
 }
