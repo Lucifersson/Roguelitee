@@ -61,7 +61,6 @@ public class Item {
 	// GETTERS
 	// ------------------------------------------------------------------
 
-	// Getters para los modificadores (usados por la clase Jugador)
 	public int getModCordura() {
 		return modCordura;
 	}

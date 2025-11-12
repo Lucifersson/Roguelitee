@@ -176,9 +176,6 @@ public class Jugador {
 	// GETTERS (Añadido getEstadistica genérico)
 	// ------------------------------------------------------------------
 
-	/**
-	 * * Getter genérico para obtener el valor de una estadística por nombre.
-	 */
 	public int getEstadistica(String nombreEstadistica) {
 		switch (nombreEstadistica.toLowerCase()) {
 			case "cordura":
