@@ -2,6 +2,8 @@ package Entidades.Criatura;
 
 import Entidades.Entidad;
 import Entidades.Jugador;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,7 +48,25 @@ public class RocaDesagradecida extends Entidad {
                 return "La Roca se ofende por tu 'superioridad moral' y te roba un objeto valioso mientras te distrae.";
 
             default:
-                return "Error de acción.";
+                return interaccionExtra(jugador, seleccion, this.eventosExtra);
         }
+    }
+
+    public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
+        if (!eventosExtra.isEmpty()) {
+            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+
+            }
+            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+
+            }
+        }
+        return "No entiendes bien qué hacer.";
     }
 }

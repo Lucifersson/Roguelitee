@@ -1,7 +1,9 @@
-package Roguelite.Entidades.Criatura;
+package Entidades.Criatura;
 
-import Roguelite.Entidad;
-import Roguelite.Jugador;
+import Entidades.Entidad;
+import Entidades.Jugador;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,11 +34,11 @@ public class ElementalLlama extends Entidad {
 
         switch (seleccion) {
             case "1. Intentar apagarlo de un soplido":
-                jugador.reducirSalud(danoQuemaduraMax);
+                jugador.reducirCordura(danoQuemaduraMax);
                 return "Te acercas demasiado. La llama te envuelve, quemándote gravemente. Recibes un brutal golpe de **" + danoQuemaduraMax + " de daño**.";
 
             case "2. Lanzarle una botella de agua":
-                jugador.reducirSalud(danoCalorMin);
+                jugador.reducirCordura(danoCalorMin);
                 return "El agua se evapora instantáneamente. La explosión de vapor te chamusca el pelo. Recibes **" + danoCalorMin + " de daño**.";
 
             case "3. Sacar un malvavisco para asarlo":
@@ -46,7 +48,25 @@ public class ElementalLlama extends Entidad {
                 return "Logras pasar corriendo por el lateral antes de que el calor te afecte. ¡Encuentro evadido!";
 
             default:
-                return "Error de acción.";
+                return interaccionExtra(jugador, seleccion, this.eventosExtra);
         }
+    }
+
+    public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
+        if (!eventosExtra.isEmpty()) {
+            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+
+            }
+            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+
+            }
+        }
+        return "No entiendes bien qué hacer.";
     }
 }

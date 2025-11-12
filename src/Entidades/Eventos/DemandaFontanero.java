@@ -4,6 +4,7 @@ import Entidades.Entidad;
 import Entidades.Item;
 import Entidades.Jugador;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +40,25 @@ public class DemandaFontanero extends Entidad {
             case "4. Huir y cambiar tu avatar":
                 return "Decides que no vale la pena el problema legal. Cambias tu avatar y te alejas de la controversia, aunque pierdes algo de credibilidad en el proceso.";
             default:
-                return "No entiendes bien qué hacer.";
+                return interaccionExtra(jugador, seleccion, this.eventosExtra);
         }
+    }
+
+    public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
+        if (!eventosExtra.isEmpty()) {
+            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+
+            }
+            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+
+            }
+        }
+        return "No entiendes bien qué hacer.";
     }
 }

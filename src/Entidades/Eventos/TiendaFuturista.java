@@ -3,6 +3,7 @@ package Entidades.Eventos;
 import Entidades.Entidad;
 import Entidades.Jugador;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,25 @@ public class TiendaFuturista extends Entidad {
             case "4. Preguntar por productos específicos":
                 return "El dron te ofrece una suscripción premium a un asistente virtual por 25 créditos. Decides que no vale la pena.";
             default:
-                return "No entiendes bien qué hacer.";
+                return interaccionExtra(jugador, seleccion, this.eventosExtra);
         }
+    }
+
+    public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
+        if (!eventosExtra.isEmpty()) {
+            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+
+            }
+            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+
+            }
+        }
+        return "No entiendes bien qué hacer.";
     }
 }

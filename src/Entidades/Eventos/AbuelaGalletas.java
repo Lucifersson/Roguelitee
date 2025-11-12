@@ -3,6 +3,7 @@ package Entidades.Eventos;
 import Entidades.Entidad;
 import Entidades.Jugador;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,18 +59,25 @@ public class AbuelaGalletas extends Entidad {
                 return "Al intentar apagar uno, una abuela te agarra la mano con fuerza.\n" +
                         "Te mira con ojos llenos de tristeza... **Ganas 2 de Intimidación**";
             default:
-                interaccionExtra(jugador, seleccion, cantExtra);
+                return interaccionExtra(jugador, seleccion, this.eventosExtra);
         }
-        return "No entiendes bien qué hacer";
     }
 
-    public String interaccionExtra (Jugador jugador, String seleccion, int cantExtra) {
-        if (cantExtra > 0) {
-            if (seleccion.equals("5")) {
-                return "Pasa algo";
+    public String interaccionExtra (Jugador jugador, String seleccion, ArrayList<ArrayList<String>> eventosExtra) {
+        if (!eventosExtra.isEmpty()) {
+            if (eventosExtra.get(0).get(0) == "1" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "1" && seleccion.equals("6")) {
+
+            }
+            else if (eventosExtra.get(0).get(0) == "2" && seleccion.equals("5")) {
+
+            }
+            else if (eventosExtra.get(1).get(0) == "2" && seleccion.equals("6")) {
+
             }
         }
         return "No entiendes bien qué hacer.";
-
     }
 }
