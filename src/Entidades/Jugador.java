@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Jugador {
 
-	// --- Constantes ---
+	// --- Constantes --
 	private static final int MAX_ESTADISTICA = 20;
 	private static final int MIN_ESTADISTICA = 0;
 	private static final int LIMITE_INVENTARIO = 3;
