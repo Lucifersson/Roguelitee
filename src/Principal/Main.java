@@ -1,9 +1,8 @@
 package Principal;
 
-import Entidades.Criatura.Suegra;
+import Entidades.Criatura.*;
 import Entidades.Entidad;
-import Entidades.Eventos.AbuelaGalletas;
-import Entidades.Eventos.CajaTexto;
+import Entidades.Eventos.*;
 import Entidades.Jugador;
 import Entidades.Sistema.GestorLogros;
 
@@ -261,15 +260,57 @@ public class Main {
   private static void jugar() {
     // Lista con todos los eventos posibles (De momento una prueba con 3)
     List<Entidad> eventosDisponibles = new ArrayList<>();
+    //Anadir todos los eventos
     eventosDisponibles.add(new AbuelaGalletas());
-    eventosDisponibles.add(new Suegra());
+    eventosDisponibles.add(new AscensorPosibilidades());
     eventosDisponibles.add(new CajaTexto());
+    eventosDisponibles.add(new CuartaPared());
+    eventosDisponibles.add(new DemandaFontanero());
+    eventosDisponibles.add(new EspejoMagico());
+    eventosDisponibles.add(new GatoCuantico());
+    eventosDisponibles.add(new NPCParking());
+    eventosDisponibles.add(new PantallaAzul());
+    eventosDisponibles.add(new ProgramaTV());
+    eventosDisponibles.add(new PublicidadEmergente());
+    eventosDisponibles.add(new PuenteRoto());
+    eventosDisponibles.add(new ReunionNPCs());
+    eventosDisponibles.add(new SalaPruebas());
+    eventosDisponibles.add(new TiendaFuturista());
+    eventosDisponibles.add(new WifiFantasma());
 
-    // Mezclamos aleatoriamente
+    //Anadir todas las criaturas
+      eventosDisponibles.add(new AranaRedes());
+      eventosDisponibles.add(new ArmaduraAbandonada());
+      eventosDisponibles.add(new AutomataRoto());
+      eventosDisponibles.add(new BrumaRastreadora());
+      eventosDisponibles.add(new CharcoReflejos());
+      eventosDisponibles.add(new CraneoRisueno());
+      eventosDisponibles.add(new ElementalLlama());
+      eventosDisponibles.add(new EspectroMemoria());
+      eventosDisponibles.add(new EstatuaLlorona());
+      eventosDisponibles.add(new GolemMusgo());
+      eventosDisponibles.add(new GusanoHielo());
+      eventosDisponibles.add(new HombreHongo());
+      eventosDisponibles.add(new LibroEnfadado());
+      eventosDisponibles.add(new LimoParlante());
+      eventosDisponibles.add(new LuzBurlona());
+      eventosDisponibles.add(new MurcielagoEco());
+      eventosDisponibles.add(new NieblaParpadeante());
+      eventosDisponibles.add(new OrejaEscuchadora());
+      eventosDisponibles.add(new ParedGelatina());
+      eventosDisponibles.add(new PortalDuda());
+      eventosDisponibles.add(new RaizEstranguladora());
+      eventosDisponibles.add(new RemolinoArena());
+      eventosDisponibles.add(new RocaDesagradecida());
+      eventosDisponibles.add(new Suegra());
+      eventosDisponibles.add(new TentaculoLanguido());
+
+
+      // Mezclamos aleatoriamente
     Collections.shuffle(eventosDisponibles);
 
-    // Bucle del juego (ej: 25 eventos y finaliza) (De momento una prueba con 3)
-    List<Entidad> eventosPartida = eventosDisponibles.subList(0, Math.min(3, eventosDisponibles.size()));
+    // Bucle del juego (ej: 25 eventos y finaliza)
+    List<Entidad> eventosPartida = eventosDisponibles.subList(0, Math.min(25, eventosDisponibles.size()));
 
     for (Entidad evento : eventosPartida) {
       if (!jugador.estaVivo()) break; // Si muere antes de terminar el bucle de juego
